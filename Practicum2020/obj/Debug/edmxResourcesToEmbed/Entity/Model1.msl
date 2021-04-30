@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище db_digital_inventoryModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_ROLE">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_ROLE">
+        <MappingFragment StoreEntitySet="TB ROLE">
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+          <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_CODE_GEN">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_CODE_GEN">
+        <MappingFragment StoreEntitySet="TB_CODE_GEN">
+          <ScalarProperty Name="ID_GEN" ColumnName="ID_GEN" />
+          <ScalarProperty Name="NAME_GEN" ColumnName="NAME_GEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_ITEM_DESK">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_ITEM_DESK">
+        <MappingFragment StoreEntitySet="TB_ITEM_DESK">
+          <ScalarProperty Name="ID_ITEMS" ColumnName="ID_ITEMS" />
+          <ScalarProperty Name="NAME_ITEM" ColumnName="NAME_ITEM" />
+          <ScalarProperty Name="ID_GEN" ColumnName="ID_GEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_ITEMS">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_ITEMS">
+        <MappingFragment StoreEntitySet="TB_ITEMS">
+          <ScalarProperty Name="ID_ITEMS" ColumnName="ID_ITEMS" />
+          <ScalarProperty Name="ID_STORAGE" ColumnName="ID_STORAGE" />
+          <ScalarProperty Name="ID_SPEC" ColumnName="ID_SPEC" />
+          <ScalarProperty Name="ID_PLACE" ColumnName="ID_PLACE" />
+          <ScalarProperty Name="ID_SQUARE" ColumnName="ID_SQUARE" />
+          <ScalarProperty Name="DATE_PRIB" ColumnName="DATE_PRIB" />
+          <ScalarProperty Name="DATE_OTB" ColumnName="DATE_OTB" />
+          <ScalarProperty Name="PLACE_PRIB" ColumnName="PLACE_PRIB" />
+          <ScalarProperty Name="PLACE_OTB" ColumnName="PLACE_OTB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_SPEC">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_SPEC">
+        <MappingFragment StoreEntitySet="TB_SPEC">
+          <ScalarProperty Name="ID_SPEC" ColumnName="ID_SPEC" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="TIME" ColumnName="TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_SQUARE">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_SQUARE">
+        <MappingFragment StoreEntitySet="TB_SQUARE">
+          <ScalarProperty Name="ID_SQUARE" ColumnName="ID_SQUARE" />
+          <ScalarProperty Name="PLACE_X" ColumnName="PLACE_X" />
+          <ScalarProperty Name="PLACE_Y" ColumnName="PLACE_Y" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_STOC_PLACE">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_STOC_PLACE">
+        <MappingFragment StoreEntitySet="TB_STOC_PLACE">
+          <ScalarProperty Name="ID_PLACE" ColumnName="ID_PLACE" />
+          <ScalarProperty Name="ID_SQUARE" ColumnName="ID_SQUARE" />
+          <ScalarProperty Name="PLACE_X" ColumnName="PLACE_X" />
+          <ScalarProperty Name="PLACE_Y" ColumnName="PLACE_Y" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_STORAGE">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_STORAGE">
+        <MappingFragment StoreEntitySet="TB_STORAGE">
+          <ScalarProperty Name="ID_STORAGE" ColumnName="ID_STORAGE" />
+          <ScalarProperty Name="NAME_STORAGE" ColumnName="NAME_STORAGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_USERS">
+      <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_USERS">
+        <MappingFragment StoreEntitySet="TB_USERS">
+          <ScalarProperty Name="ID_USERS" ColumnName="ID_USERS" />
+          <ScalarProperty Name="U_LOGIN" ColumnName="U_LOGIN" />
+          <ScalarProperty Name="U_PASS" ColumnName="U_PASS" />
+          <ScalarProperty Name="U_PHONE" ColumnName="U_PHONE" />
+          <ScalarProperty Name="U_ROLE" ColumnName="U_ROLE" />
+          <ScalarProperty Name="U_NAME" ColumnName="U_NAME" />
+          <ScalarProperty Name="U_SURNAME" ColumnName="U_SURNAME" />
+          <ScalarProperty Name="U_MIDDLENAME" ColumnName="U_MIDDLENAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,117 @@
+﻿<Page x:Class="Practicum2020.Page_program.Page_menu_user"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practicum2020.Page_program"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page_menu_user">
+
+    <Grid Name="_menu_user" Background="#FF34383D">
+        <StackPanel 
+            Orientation="Horizontal">
+            <StackPanel
+                HorizontalAlignment="Left"
+                Width="165">
+                <StackPanel
+                Height="450"
+                Orientation="Vertical" 
+                VerticalAlignment="Center" Background="#FF262A30">
+                    <Label
+                        Height="38"
+                        Content="Меню"
+                        Foreground="White"
+                        Background="#FF1E1E1E"
+                        HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center"
+                        Margin="0 0 0 10">
+                    </Label>
+
+                    <Border
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Width="100" 
+                        Height="30" 
+                        Background="#FFE6B333" 
+                        Margin="0,10">
+
+                        <Button
+                            Name="_Main"
+                            Content="&#x1F3E0; Главная"
+                            Margin="-1"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}">
+                        </Button>
+                    </Border>
+
+                    <Border
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Width="100" 
+                        Height="30" 
+                        Background="#FFE6B333" 
+                        Margin="0,10">
+                        
+                        <Button 
+                            Name="_local_room" 
+                            Content="&#x1F464; Профиль"
+                            Margin="-1"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}">
+                        </Button>
+                    </Border>
+
+
+                    <Border
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Width="100" 
+                        Height="30" 
+                        Background="#FFE6B333" 
+                        Margin="0,10">
+
+                        <Button
+                            Name="_parametr"
+                            Content="&#x2699; Настройки"
+                            Margin="-1"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}">
+                        </Button>
+                    </Border>
+
+                    <Border
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Width="100" 
+                        Height="30" 
+                        Background="#FFE6B333" 
+                        Margin="0,10">
+
+                        <Button
+                            Name="_exit"
+                            Content="&#x26D4; Покинуть"
+                            Margin="-1"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Click="_exit_Click" Padding="1,1,3,1">
+                        </Button>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel
+                Orientation="Vertical"
+                Margin="10 0 30 0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <Frame
+                    Name="_frame_menu"
+                    NavigationUIVisibility="Hidden">
+                </Frame>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище db_digital_inventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TB ROLE">
+    <Key>
+      <PropertyRef Name="ID_ROLE" />
+    </Key>
+    <Property Name="ID_ROLE" Type="int" Nullable="false" />
+    <Property Name="ROLE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TB_CODE_GEN">
+    <Key>
+      <PropertyRef Name="ID_GEN" />
+    </Key>
+    <Property Name="ID_GEN" Type="int" Nullable="false" />
+    <Property Name="NAME_GEN" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TB_ITEM_DESK">
+    <Key>
+      <PropertyRef Name="ID_ITEMS" />
+    </Key>
+    <Property Name="ID_ITEMS" Type="int" Nullable="false" />
+    <Property Name="NAME_ITEM" Type="nvarchar" MaxLength="50" />
+    <Property Name="ID_GEN" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_ITEMS">
+    <Key>
+      <PropertyRef Name="ID_ITEMS" />
+      <PropertyRef Name="ID_STORAGE" />
+      <PropertyRef Name="ID_SPEC" />
+      <PropertyRef Name="ID_PLACE" />
+      <PropertyRef Name="ID_SQUARE" />
+    </Key>
+    <Property Name="ID_ITEMS" Type="int" Nullable="false" />
+    <Property Name="ID_STORAGE" Type="int" Nullable="false" />
+    <Property Name="ID_SPEC" Type="int" Nullable="false" />
+    <Property Name="ID_PLACE" Type="int" Nullable="false" />
+    <Property Name="ID_SQUARE" Type="int" Nullable="false" />
+    <Property Name="DATE_PRIB" Type="date" />
+    <Property Name="DATE_OTB" Type="date" />
+    <Property Name="PLACE_PRIB" Type="int" />
+    <Property Name="PLACE_OTB" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_SPEC">
+    <Key>
+      <PropertyRef Name="ID_SPEC" />
+    </Key>
+    <Property Name="ID_SPEC" Type="int" Nullable="false" />
+    <Property Name="DATE" Type="date" />
+    <Property Name="TIME" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="TB_SQUARE">
+    <Key>
+      <PropertyRef Name="ID_SQUARE" />
+    </Key>
+    <Property Name="ID_SQUARE" Type="int" Nullable="false" />
+    <Property Name="PLACE_X" Type="int" />
+    <Property Name="PLACE_Y" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_STOC_PLACE">
+    <Key>
+      <PropertyRef Name="ID_PLACE" />
+    </Key>
+    <Property Name="ID_PLACE" Type="int" Nullable="false" />
+    <Property Name="ID_SQUARE" Type="int" />
+    <Property Name="PLACE_X" Type="int" />
+    <Property Name="PLACE_Y" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_STORAGE">
+    <Key>
+      <PropertyRef Name="ID_STORAGE" />
+    </Key>
+    <Property Name="ID_STORAGE" Type="int" Nullable="false" />
+    <Property Name="NAME_STORAGE" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TB_USERS">
+    <Key>
+      <PropertyRef Name="ID_USERS" />
+    </Key>
+    <Property Name="ID_USERS" Type="int" Nullable="false" />
+    <Property Name="U_LOGIN" Type="nvarchar" MaxLength="20" />
+    <Property Name="U_PASS" Type="nvarchar" MaxLength="20" />
+    <Property Name="U_PHONE" Type="nvarchar" MaxLength="13" />
+    <Property Name="U_ROLE" Type="int" />
+    <Property Name="U_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="U_SURNAME" Type="varchar" MaxLength="50" />
+    <Property Name="U_MIDDLENAME" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__TB_ITEM_D__ID_GE__4B7734FF">
+    <End Role="TB_CODE_GEN" Type="Self.TB_CODE_GEN" Multiplicity="0..1" />
+    <End Role="TB_ITEM_DESK" Type="Self.TB_ITEM_DESK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_CODE_GEN">
+        <PropertyRef Name="ID_GEN" />
+      </Principal>
+      <Dependent Role="TB_ITEM_DESK">
+        <PropertyRef Name="ID_GEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TB_ITEMS__ID_ITE__55F4C372">
+    <End Role="TB_ITEM_DESK" Type="Self.TB_ITEM_DESK" Multiplicity="1" />
+    <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_ITEM_DESK">
+        <PropertyRef Name="ID_ITEMS" />
+      </Principal>
+      <Dependent Role="TB_ITEMS">
+        <PropertyRef Name="ID_ITEMS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TB_ITEMS__ID_PLA__58D1301D">
+    <End Role="TB_STOC_PLACE" Type="Self.TB_STOC_PLACE" Multiplicity="1" />
+    <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_STOC_PLACE">
+        <PropertyRef Name="ID_PLACE" />
+      </Principal>
+      <Dependent Role="TB_ITEMS">
+        <PropertyRef Name="ID_PLACE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TB_ITEMS__ID_SPE__56E8E7AB">
+    <End Role="TB_SPEC" Type="Self.TB_SPEC" Multiplicity="1" />
+    <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_SPEC">
+        <PropertyRef Name="ID_SPEC" />
+      </Principal>
+      <Dependent Role="TB_ITEMS">
+        <PropertyRef Name="ID_SPEC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TB_ITEMS__ID_SQU__59C55456">
+    <End Role="TB_SQUARE" Type="Self.TB_SQUARE" Multiplicity="1" />
+    <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_SQUARE">
+        <PropertyRef Name="ID_SQUARE" />
+      </Principal>
+      <Dependent Role="TB_ITEMS">
+        <PropertyRef Name="ID_SQUARE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TB_ITEMS__ID_STO__57DD0BE4">
+    <End Role="TB_STORAGE" Type="Self.TB_STORAGE" Multiplicity="1" />
+    <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_STORAGE">
+        <PropertyRef Name="ID_STORAGE" />
+      </Principal>
+      <Dependent Role="TB_ITEMS">
+        <PropertyRef Name="ID_STORAGE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_USERS_TB ROLE">
+    <End Role="TB ROLE" Type="Self.TB ROLE" Multiplicity="0..1" />
+    <End Role="TB_USERS" Type="Self.TB_USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB ROLE">
+        <PropertyRef Name="ID_ROLE" />
+      </Principal>
+      <Dependent Role="TB_USERS">
+        <PropertyRef Name="U_ROLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище db_digital_inventoryModelContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB ROLE" EntityType="Self.TB ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_CODE_GEN" EntityType="Self.TB_CODE_GEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_ITEM_DESK" EntityType="Self.TB_ITEM_DESK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_ITEMS" EntityType="Self.TB_ITEMS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_SPEC" EntityType="Self.TB_SPEC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_SQUARE" EntityType="Self.TB_SQUARE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_STOC_PLACE" EntityType="Self.TB_STOC_PLACE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_STORAGE" EntityType="Self.TB_STORAGE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_USERS" EntityType="Self.TB_USERS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__TB_ITEM_D__ID_GE__4B7734FF" Association="Self.FK__TB_ITEM_D__ID_GE__4B7734FF">
+      <End Role="TB_CODE_GEN" EntitySet="TB_CODE_GEN" />
+      <End Role="TB_ITEM_DESK" EntitySet="TB_ITEM_DESK" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_ITEMS__ID_ITE__55F4C372" Association="Self.FK__TB_ITEMS__ID_ITE__55F4C372">
+      <End Role="TB_ITEM_DESK" EntitySet="TB_ITEM_DESK" />
+      <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_ITEMS__ID_PLA__58D1301D" Association="Self.FK__TB_ITEMS__ID_PLA__58D1301D">
+      <End Role="TB_STOC_PLACE" EntitySet="TB_STOC_PLACE" />
+      <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_ITEMS__ID_SPE__56E8E7AB" Association="Self.FK__TB_ITEMS__ID_SPE__56E8E7AB">
+      <End Role="TB_SPEC" EntitySet="TB_SPEC" />
+      <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_ITEMS__ID_SQU__59C55456" Association="Self.FK__TB_ITEMS__ID_SQU__59C55456">
+      <End Role="TB_SQUARE" EntitySet="TB_SQUARE" />
+      <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_ITEMS__ID_STO__57DD0BE4" Association="Self.FK__TB_ITEMS__ID_STO__57DD0BE4">
+      <End Role="TB_STORAGE" EntitySet="TB_STORAGE" />
+      <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_USERS_TB ROLE" Association="Self.FK_TB_USERS_TB ROLE">
+      <End Role="TB ROLE" EntitySet="TB ROLE" />
+      <End Role="TB_USERS" EntitySet="TB_USERS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

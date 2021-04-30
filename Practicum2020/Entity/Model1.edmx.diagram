@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="33f2a007573343d7a4791b36fe56d6e9" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="db_digital_inventoryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_ROLE" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_CODE_GEN" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_ITEM_DESK" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_ITEMS" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_SPEC" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_SQUARE" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_STOC_PLACE" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_STORAGE" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_digital_inventoryModel.TB_USERS" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK_TB_USERS_TB_ROLE" ManuallyRouted="false" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK__TB_ITEM_D__ID_GE__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK__TB_ITEMS__ID_ITE__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK__TB_ITEMS__ID_PLA__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK__TB_ITEMS__ID_SPE__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK__TB_ITEMS__ID_SQU__59C55456" ManuallyRouted="false" />
+        <AssociationConnector Association="db_digital_inventoryModel.FK__TB_ITEMS__ID_STO__57DD0BE4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

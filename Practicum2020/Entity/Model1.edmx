@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище db_digital_inventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TB ROLE">
+          <Key>
+            <PropertyRef Name="ID_ROLE" />
+          </Key>
+          <Property Name="ID_ROLE" Type="int" Nullable="false" />
+          <Property Name="ROLE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_CODE_GEN">
+          <Key>
+            <PropertyRef Name="ID_GEN" />
+          </Key>
+          <Property Name="ID_GEN" Type="int" Nullable="false" />
+          <Property Name="NAME_GEN" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_ITEM_DESK">
+          <Key>
+            <PropertyRef Name="ID_ITEMS" />
+          </Key>
+          <Property Name="ID_ITEMS" Type="int" Nullable="false" />
+          <Property Name="NAME_ITEM" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_GEN" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_ITEMS">
+          <Key>
+            <PropertyRef Name="ID_ITEMS" />
+            <PropertyRef Name="ID_STORAGE" />
+            <PropertyRef Name="ID_SPEC" />
+            <PropertyRef Name="ID_PLACE" />
+            <PropertyRef Name="ID_SQUARE" />
+          </Key>
+          <Property Name="ID_ITEMS" Type="int" Nullable="false" />
+          <Property Name="ID_STORAGE" Type="int" Nullable="false" />
+          <Property Name="ID_SPEC" Type="int" Nullable="false" />
+          <Property Name="ID_PLACE" Type="int" Nullable="false" />
+          <Property Name="ID_SQUARE" Type="int" Nullable="false" />
+          <Property Name="DATE_PRIB" Type="date" />
+          <Property Name="DATE_OTB" Type="date" />
+          <Property Name="PLACE_PRIB" Type="int" />
+          <Property Name="PLACE_OTB" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_SPEC">
+          <Key>
+            <PropertyRef Name="ID_SPEC" />
+          </Key>
+          <Property Name="ID_SPEC" Type="int" Nullable="false" />
+          <Property Name="DATE" Type="date" />
+          <Property Name="TIME" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_SQUARE">
+          <Key>
+            <PropertyRef Name="ID_SQUARE" />
+          </Key>
+          <Property Name="ID_SQUARE" Type="int" Nullable="false" />
+          <Property Name="PLACE_X" Type="int" />
+          <Property Name="PLACE_Y" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_STOC_PLACE">
+          <Key>
+            <PropertyRef Name="ID_PLACE" />
+          </Key>
+          <Property Name="ID_PLACE" Type="int" Nullable="false" />
+          <Property Name="ID_SQUARE" Type="int" />
+          <Property Name="PLACE_X" Type="int" />
+          <Property Name="PLACE_Y" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_STORAGE">
+          <Key>
+            <PropertyRef Name="ID_STORAGE" />
+          </Key>
+          <Property Name="ID_STORAGE" Type="int" Nullable="false" />
+          <Property Name="NAME_STORAGE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_USERS">
+          <Key>
+            <PropertyRef Name="ID_USERS" />
+          </Key>
+          <Property Name="ID_USERS" Type="int" Nullable="false" />
+          <Property Name="U_LOGIN" Type="nvarchar" MaxLength="20" />
+          <Property Name="U_PASS" Type="nvarchar" MaxLength="20" />
+          <Property Name="U_PHONE" Type="nvarchar" MaxLength="13" />
+          <Property Name="U_ROLE" Type="int" />
+          <Property Name="U_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="U_SURNAME" Type="varchar" MaxLength="50" />
+          <Property Name="U_MIDDLENAME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__TB_ITEM_D__ID_GE__4B7734FF">
+          <End Role="TB_CODE_GEN" Type="Self.TB_CODE_GEN" Multiplicity="0..1" />
+          <End Role="TB_ITEM_DESK" Type="Self.TB_ITEM_DESK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CODE_GEN">
+              <PropertyRef Name="ID_GEN" />
+            </Principal>
+            <Dependent Role="TB_ITEM_DESK">
+              <PropertyRef Name="ID_GEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_ITE__55F4C372">
+          <End Role="TB_ITEM_DESK" Type="Self.TB_ITEM_DESK" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ITEM_DESK">
+              <PropertyRef Name="ID_ITEMS" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_ITEMS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_PLA__58D1301D">
+          <End Role="TB_STOC_PLACE" Type="Self.TB_STOC_PLACE" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_STOC_PLACE">
+              <PropertyRef Name="ID_PLACE" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_PLACE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_SPE__56E8E7AB">
+          <End Role="TB_SPEC" Type="Self.TB_SPEC" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SPEC">
+              <PropertyRef Name="ID_SPEC" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_SPEC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_SQU__59C55456">
+          <End Role="TB_SQUARE" Type="Self.TB_SQUARE" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SQUARE">
+              <PropertyRef Name="ID_SQUARE" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_SQUARE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_STO__57DD0BE4">
+          <End Role="TB_STORAGE" Type="Self.TB_STORAGE" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_STORAGE">
+              <PropertyRef Name="ID_STORAGE" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_STORAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_USERS_TB ROLE">
+          <End Role="TB ROLE" Type="Self.TB ROLE" Multiplicity="0..1" />
+          <End Role="TB_USERS" Type="Self.TB_USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB ROLE">
+              <PropertyRef Name="ID_ROLE" />
+            </Principal>
+            <Dependent Role="TB_USERS">
+              <PropertyRef Name="U_ROLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище db_digital_inventoryModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB ROLE" EntityType="Self.TB ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CODE_GEN" EntityType="Self.TB_CODE_GEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_ITEM_DESK" EntityType="Self.TB_ITEM_DESK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_ITEMS" EntityType="Self.TB_ITEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SPEC" EntityType="Self.TB_SPEC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SQUARE" EntityType="Self.TB_SQUARE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_STOC_PLACE" EntityType="Self.TB_STOC_PLACE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_STORAGE" EntityType="Self.TB_STORAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_USERS" EntityType="Self.TB_USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TB_ITEM_D__ID_GE__4B7734FF" Association="Self.FK__TB_ITEM_D__ID_GE__4B7734FF">
+            <End Role="TB_CODE_GEN" EntitySet="TB_CODE_GEN" />
+            <End Role="TB_ITEM_DESK" EntitySet="TB_ITEM_DESK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_ITE__55F4C372" Association="Self.FK__TB_ITEMS__ID_ITE__55F4C372">
+            <End Role="TB_ITEM_DESK" EntitySet="TB_ITEM_DESK" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_PLA__58D1301D" Association="Self.FK__TB_ITEMS__ID_PLA__58D1301D">
+            <End Role="TB_STOC_PLACE" EntitySet="TB_STOC_PLACE" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_SPE__56E8E7AB" Association="Self.FK__TB_ITEMS__ID_SPE__56E8E7AB">
+            <End Role="TB_SPEC" EntitySet="TB_SPEC" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_SQU__59C55456" Association="Self.FK__TB_ITEMS__ID_SQU__59C55456">
+            <End Role="TB_SQUARE" EntitySet="TB_SQUARE" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_STO__57DD0BE4" Association="Self.FK__TB_ITEMS__ID_STO__57DD0BE4">
+            <End Role="TB_STORAGE" EntitySet="TB_STORAGE" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_USERS_TB ROLE" Association="Self.FK_TB_USERS_TB ROLE">
+            <End Role="TB ROLE" EntitySet="TB ROLE" />
+            <End Role="TB_USERS" EntitySet="TB_USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_digital_inventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TB_ROLE">
+          <Key>
+            <PropertyRef Name="ID_ROLE" />
+          </Key>
+          <Property Name="ID_ROLE" Type="Int32" Nullable="false" />
+          <Property Name="ROLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_USERS" Relationship="Self.FK_TB_USERS_TB_ROLE" FromRole="TB_ROLE" ToRole="TB_USERS" />
+        </EntityType>
+        <EntityType Name="TB_CODE_GEN">
+          <Key>
+            <PropertyRef Name="ID_GEN" />
+          </Key>
+          <Property Name="ID_GEN" Type="Int32" Nullable="false" />
+          <Property Name="NAME_GEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_ITEM_DESK" Relationship="Self.FK__TB_ITEM_D__ID_GE__4B7734FF" FromRole="TB_CODE_GEN" ToRole="TB_ITEM_DESK" />
+        </EntityType>
+        <EntityType Name="TB_ITEM_DESK">
+          <Key>
+            <PropertyRef Name="ID_ITEMS" />
+          </Key>
+          <Property Name="ID_ITEMS" Type="Int32" Nullable="false" />
+          <Property Name="NAME_ITEM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_GEN" Type="Int32" />
+          <NavigationProperty Name="TB_CODE_GEN" Relationship="Self.FK__TB_ITEM_D__ID_GE__4B7734FF" FromRole="TB_ITEM_DESK" ToRole="TB_CODE_GEN" />
+          <NavigationProperty Name="TB_ITEMS" Relationship="Self.FK__TB_ITEMS__ID_ITE__55F4C372" FromRole="TB_ITEM_DESK" ToRole="TB_ITEMS" />
+        </EntityType>
+        <EntityType Name="TB_ITEMS">
+          <Key>
+            <PropertyRef Name="ID_ITEMS" />
+            <PropertyRef Name="ID_STORAGE" />
+            <PropertyRef Name="ID_SPEC" />
+            <PropertyRef Name="ID_PLACE" />
+            <PropertyRef Name="ID_SQUARE" />
+          </Key>
+          <Property Name="ID_ITEMS" Type="Int32" Nullable="false" />
+          <Property Name="ID_STORAGE" Type="Int32" Nullable="false" />
+          <Property Name="ID_SPEC" Type="Int32" Nullable="false" />
+          <Property Name="ID_PLACE" Type="Int32" Nullable="false" />
+          <Property Name="ID_SQUARE" Type="Int32" Nullable="false" />
+          <Property Name="DATE_PRIB" Type="DateTime" Precision="0" />
+          <Property Name="DATE_OTB" Type="DateTime" Precision="0" />
+          <Property Name="PLACE_PRIB" Type="Int32" />
+          <Property Name="PLACE_OTB" Type="Int32" />
+          <NavigationProperty Name="TB_ITEM_DESK" Relationship="Self.FK__TB_ITEMS__ID_ITE__55F4C372" FromRole="TB_ITEMS" ToRole="TB_ITEM_DESK" />
+          <NavigationProperty Name="TB_STOC_PLACE" Relationship="Self.FK__TB_ITEMS__ID_PLA__58D1301D" FromRole="TB_ITEMS" ToRole="TB_STOC_PLACE" />
+          <NavigationProperty Name="TB_SPEC" Relationship="Self.FK__TB_ITEMS__ID_SPE__56E8E7AB" FromRole="TB_ITEMS" ToRole="TB_SPEC" />
+          <NavigationProperty Name="TB_SQUARE" Relationship="Self.FK__TB_ITEMS__ID_SQU__59C55456" FromRole="TB_ITEMS" ToRole="TB_SQUARE" />
+          <NavigationProperty Name="TB_STORAGE" Relationship="Self.FK__TB_ITEMS__ID_STO__57DD0BE4" FromRole="TB_ITEMS" ToRole="TB_STORAGE" />
+        </EntityType>
+        <EntityType Name="TB_SPEC">
+          <Key>
+            <PropertyRef Name="ID_SPEC" />
+          </Key>
+          <Property Name="ID_SPEC" Type="Int32" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" Precision="0" />
+          <Property Name="TIME" Type="Time" Precision="7" />
+          <NavigationProperty Name="TB_ITEMS" Relationship="Self.FK__TB_ITEMS__ID_SPE__56E8E7AB" FromRole="TB_SPEC" ToRole="TB_ITEMS" />
+        </EntityType>
+        <EntityType Name="TB_SQUARE">
+          <Key>
+            <PropertyRef Name="ID_SQUARE" />
+          </Key>
+          <Property Name="ID_SQUARE" Type="Int32" Nullable="false" />
+          <Property Name="PLACE_X" Type="Int32" />
+          <Property Name="PLACE_Y" Type="Int32" />
+          <NavigationProperty Name="TB_ITEMS" Relationship="Self.FK__TB_ITEMS__ID_SQU__59C55456" FromRole="TB_SQUARE" ToRole="TB_ITEMS" />
+        </EntityType>
+        <EntityType Name="TB_STOC_PLACE">
+          <Key>
+            <PropertyRef Name="ID_PLACE" />
+          </Key>
+          <Property Name="ID_PLACE" Type="Int32" Nullable="false" />
+          <Property Name="ID_SQUARE" Type="Int32" />
+          <Property Name="PLACE_X" Type="Int32" />
+          <Property Name="PLACE_Y" Type="Int32" />
+          <NavigationProperty Name="TB_ITEMS" Relationship="Self.FK__TB_ITEMS__ID_PLA__58D1301D" FromRole="TB_STOC_PLACE" ToRole="TB_ITEMS" />
+        </EntityType>
+        <EntityType Name="TB_STORAGE">
+          <Key>
+            <PropertyRef Name="ID_STORAGE" />
+          </Key>
+          <Property Name="ID_STORAGE" Type="Int32" Nullable="false" />
+          <Property Name="NAME_STORAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_ITEMS" Relationship="Self.FK__TB_ITEMS__ID_STO__57DD0BE4" FromRole="TB_STORAGE" ToRole="TB_ITEMS" />
+        </EntityType>
+        <EntityType Name="TB_USERS">
+          <Key>
+            <PropertyRef Name="ID_USERS" />
+          </Key>
+          <Property Name="ID_USERS" Type="Int32" Nullable="false" />
+          <Property Name="U_LOGIN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="U_PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="U_PHONE" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="U_ROLE" Type="Int32" />
+          <Property Name="U_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="U_SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="U_MIDDLENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_ROLE" Relationship="Self.FK_TB_USERS_TB_ROLE" FromRole="TB_USERS" ToRole="TB_ROLE" />
+        </EntityType>
+        <Association Name="FK_TB_USERS_TB_ROLE">
+          <End Role="TB_ROLE" Type="Self.TB_ROLE" Multiplicity="0..1" />
+          <End Role="TB_USERS" Type="Self.TB_USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ROLE">
+              <PropertyRef Name="ID_ROLE" />
+            </Principal>
+            <Dependent Role="TB_USERS">
+              <PropertyRef Name="U_ROLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEM_D__ID_GE__4B7734FF">
+          <End Role="TB_CODE_GEN" Type="Self.TB_CODE_GEN" Multiplicity="0..1" />
+          <End Role="TB_ITEM_DESK" Type="Self.TB_ITEM_DESK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CODE_GEN">
+              <PropertyRef Name="ID_GEN" />
+            </Principal>
+            <Dependent Role="TB_ITEM_DESK">
+              <PropertyRef Name="ID_GEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_ITE__55F4C372">
+          <End Role="TB_ITEM_DESK" Type="Self.TB_ITEM_DESK" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ITEM_DESK">
+              <PropertyRef Name="ID_ITEMS" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_ITEMS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_PLA__58D1301D">
+          <End Role="TB_STOC_PLACE" Type="Self.TB_STOC_PLACE" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_STOC_PLACE">
+              <PropertyRef Name="ID_PLACE" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_PLACE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_SPE__56E8E7AB">
+          <End Role="TB_SPEC" Type="Self.TB_SPEC" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SPEC">
+              <PropertyRef Name="ID_SPEC" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_SPEC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_SQU__59C55456">
+          <End Role="TB_SQUARE" Type="Self.TB_SQUARE" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SQUARE">
+              <PropertyRef Name="ID_SQUARE" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_SQUARE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_ITEMS__ID_STO__57DD0BE4">
+          <End Role="TB_STORAGE" Type="Self.TB_STORAGE" Multiplicity="1" />
+          <End Role="TB_ITEMS" Type="Self.TB_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_STORAGE">
+              <PropertyRef Name="ID_STORAGE" />
+            </Principal>
+            <Dependent Role="TB_ITEMS">
+              <PropertyRef Name="ID_STORAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TB_ROLE" EntityType="Self.TB_ROLE" />
+          <EntitySet Name="TB_CODE_GEN" EntityType="Self.TB_CODE_GEN" />
+          <EntitySet Name="TB_ITEM_DESK" EntityType="Self.TB_ITEM_DESK" />
+          <EntitySet Name="TB_ITEMS" EntityType="Self.TB_ITEMS" />
+          <EntitySet Name="TB_SPEC" EntityType="Self.TB_SPEC" />
+          <EntitySet Name="TB_SQUARE" EntityType="Self.TB_SQUARE" />
+          <EntitySet Name="TB_STOC_PLACE" EntityType="Self.TB_STOC_PLACE" />
+          <EntitySet Name="TB_STORAGE" EntityType="Self.TB_STORAGE" />
+          <EntitySet Name="TB_USERS" EntityType="Self.TB_USERS" />
+          <AssociationSet Name="FK_TB_USERS_TB_ROLE" Association="Self.FK_TB_USERS_TB_ROLE">
+            <End Role="TB_ROLE" EntitySet="TB_ROLE" />
+            <End Role="TB_USERS" EntitySet="TB_USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEM_D__ID_GE__4B7734FF" Association="Self.FK__TB_ITEM_D__ID_GE__4B7734FF">
+            <End Role="TB_CODE_GEN" EntitySet="TB_CODE_GEN" />
+            <End Role="TB_ITEM_DESK" EntitySet="TB_ITEM_DESK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_ITE__55F4C372" Association="Self.FK__TB_ITEMS__ID_ITE__55F4C372">
+            <End Role="TB_ITEM_DESK" EntitySet="TB_ITEM_DESK" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_PLA__58D1301D" Association="Self.FK__TB_ITEMS__ID_PLA__58D1301D">
+            <End Role="TB_STOC_PLACE" EntitySet="TB_STOC_PLACE" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_SPE__56E8E7AB" Association="Self.FK__TB_ITEMS__ID_SPE__56E8E7AB">
+            <End Role="TB_SPEC" EntitySet="TB_SPEC" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_SQU__59C55456" Association="Self.FK__TB_ITEMS__ID_SQU__59C55456">
+            <End Role="TB_SQUARE" EntitySet="TB_SQUARE" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_ITEMS__ID_STO__57DD0BE4" Association="Self.FK__TB_ITEMS__ID_STO__57DD0BE4">
+            <End Role="TB_STORAGE" EntitySet="TB_STORAGE" />
+            <End Role="TB_ITEMS" EntitySet="TB_ITEMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище db_digital_inventoryModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ROLE">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_ROLE">
+              <MappingFragment StoreEntitySet="TB ROLE">
+                <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CODE_GEN">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_CODE_GEN">
+              <MappingFragment StoreEntitySet="TB_CODE_GEN">
+                <ScalarProperty Name="ID_GEN" ColumnName="ID_GEN" />
+                <ScalarProperty Name="NAME_GEN" ColumnName="NAME_GEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ITEM_DESK">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_ITEM_DESK">
+              <MappingFragment StoreEntitySet="TB_ITEM_DESK">
+                <ScalarProperty Name="ID_ITEMS" ColumnName="ID_ITEMS" />
+                <ScalarProperty Name="NAME_ITEM" ColumnName="NAME_ITEM" />
+                <ScalarProperty Name="ID_GEN" ColumnName="ID_GEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ITEMS">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_ITEMS">
+              <MappingFragment StoreEntitySet="TB_ITEMS">
+                <ScalarProperty Name="ID_ITEMS" ColumnName="ID_ITEMS" />
+                <ScalarProperty Name="ID_STORAGE" ColumnName="ID_STORAGE" />
+                <ScalarProperty Name="ID_SPEC" ColumnName="ID_SPEC" />
+                <ScalarProperty Name="ID_PLACE" ColumnName="ID_PLACE" />
+                <ScalarProperty Name="ID_SQUARE" ColumnName="ID_SQUARE" />
+                <ScalarProperty Name="DATE_PRIB" ColumnName="DATE_PRIB" />
+                <ScalarProperty Name="DATE_OTB" ColumnName="DATE_OTB" />
+                <ScalarProperty Name="PLACE_PRIB" ColumnName="PLACE_PRIB" />
+                <ScalarProperty Name="PLACE_OTB" ColumnName="PLACE_OTB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_SPEC">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_SPEC">
+              <MappingFragment StoreEntitySet="TB_SPEC">
+                <ScalarProperty Name="ID_SPEC" ColumnName="ID_SPEC" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="TIME" ColumnName="TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_SQUARE">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_SQUARE">
+              <MappingFragment StoreEntitySet="TB_SQUARE">
+                <ScalarProperty Name="ID_SQUARE" ColumnName="ID_SQUARE" />
+                <ScalarProperty Name="PLACE_X" ColumnName="PLACE_X" />
+                <ScalarProperty Name="PLACE_Y" ColumnName="PLACE_Y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_STOC_PLACE">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_STOC_PLACE">
+              <MappingFragment StoreEntitySet="TB_STOC_PLACE">
+                <ScalarProperty Name="ID_PLACE" ColumnName="ID_PLACE" />
+                <ScalarProperty Name="ID_SQUARE" ColumnName="ID_SQUARE" />
+                <ScalarProperty Name="PLACE_X" ColumnName="PLACE_X" />
+                <ScalarProperty Name="PLACE_Y" ColumnName="PLACE_Y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_STORAGE">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_STORAGE">
+              <MappingFragment StoreEntitySet="TB_STORAGE">
+                <ScalarProperty Name="ID_STORAGE" ColumnName="ID_STORAGE" />
+                <ScalarProperty Name="NAME_STORAGE" ColumnName="NAME_STORAGE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_USERS">
+            <EntityTypeMapping TypeName="db_digital_inventoryModel.TB_USERS">
+              <MappingFragment StoreEntitySet="TB_USERS">
+                <ScalarProperty Name="ID_USERS" ColumnName="ID_USERS" />
+                <ScalarProperty Name="U_LOGIN" ColumnName="U_LOGIN" />
+                <ScalarProperty Name="U_PASS" ColumnName="U_PASS" />
+                <ScalarProperty Name="U_PHONE" ColumnName="U_PHONE" />
+                <ScalarProperty Name="U_ROLE" ColumnName="U_ROLE" />
+                <ScalarProperty Name="U_NAME" ColumnName="U_NAME" />
+                <ScalarProperty Name="U_SURNAME" ColumnName="U_SURNAME" />
+                <ScalarProperty Name="U_MIDDLENAME" ColumnName="U_MIDDLENAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
